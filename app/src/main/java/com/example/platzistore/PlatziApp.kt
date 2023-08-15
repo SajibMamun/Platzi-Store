@@ -1,6 +1,7 @@
 package com.example.platzistore
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-class PlatziApp:Application() {
-}
+@HiltAndroidApp
+class PlatziApp:Application()
