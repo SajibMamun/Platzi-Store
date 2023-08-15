@@ -1,8 +1,11 @@
-package com.example.platzistore
+package com.example.platzistore.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.platzistore.R
+import dagger.hilt.EntryPoint
 
+@EntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
