@@ -1,6 +1,6 @@
 package com.example.platzistore.di
 
-import com.example.platzistore.network.ApiService
+import com.example.platzistore.network.AuthService
 import com.example.platzistore.utils.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -27,8 +27,8 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun ProvidePlatziAPiService(retrofit: Retrofit):ApiService{
-        return retrofit.create(ApiService::class.java)
+    fun ProvidePlatziAPiService(retrofit: Retrofit):AuthService{
+        return retrofit.create(AuthService::class.java)
 
     }
 }

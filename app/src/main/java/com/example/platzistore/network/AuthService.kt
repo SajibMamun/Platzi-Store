@@ -5,7 +5,7 @@ import com.example.platzistore.model.data.login.ResponseLogin
 import retrofit2.Response
 import retrofit2.http.POST
 
-interface ApiService {
+interface AuthService {
 
 @POST("auth/login")
     suspend fun login(requestLogin: RequestLogin): Response<ResponseLogin>
