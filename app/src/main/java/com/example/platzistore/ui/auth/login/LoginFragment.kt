@@ -13,7 +13,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.platzistore.R
 import com.example.platzistore.databinding.FragmentLoginBinding
 import com.example.platzistore.model.data.login.RequestLogin
+import com.example.platzistore.utils.PrefsManager
+import com.example.platzistore.utils.TOKEN_KEY
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -23,12 +26,15 @@ class LoginFragment : Fragment() {
 
     private val viewModel: LoginViewModel by viewModels()
 
+    @Inject
+    lateinit var prefsManager: PrefsManager
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        binding=FragmentLoginBinding.inflate(inflater,container,false)
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -41,13 +47,14 @@ class LoginFragment : Fragment() {
         }
 
 
-        binding.loginButton.setOnClickListener { 
-            
-            
-            val email=binding.emailEditText?.text.toString()
-            val password=binding.passwordEditText?.text.toString()
-            
-            handleLogin(email,password)
+        binding.loginButton.setOnClickListener {
+
+
+            val email = binding.emailEditText?.text.toString()
+            val password = binding.passwordEditText?.text.toString()
+
+            //handleLogin(email, password)
+            handleLogin("john@mail.com", "changeme")
 
         }
 
@@ -56,8 +63,8 @@ class LoginFragment : Fragment() {
             if (!it.accessToken.isNullOrBlank()) {
                 Toast.makeText(requireContext(), "Login success ! ", Toast.LENGTH_SHORT).show()
 
+                prefsManager.setPrefs(TOKEN_KEY,it.accessToken.toString())
             }
-            Log.d("TAG", "Token: $it ")
 
         }
 
@@ -65,9 +72,8 @@ class LoginFragment : Fragment() {
     }
 
 
-
     private fun handleLogin(email: String, password: String) {
-        val requestLogin=RequestLogin(email = email, password = password)
+        val requestLogin = RequestLogin(email = email, password = password)
         viewModel.login(requestLogin)
 
 
