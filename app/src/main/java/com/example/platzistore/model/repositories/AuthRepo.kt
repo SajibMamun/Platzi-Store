@@ -19,9 +19,9 @@ class AuthRepo @Inject constructor(val authService: AuthService) {
     }
 
 
-    suspend   fun register(requestRegister: RequestRegister): ResponseRegister{
-        val response = authService.register(requestRegister)
-        return response.body()!!
+    suspend   fun register(requestRegister: RequestRegister): Response<ResponseRegister>{
+      return authService.register(requestRegister)
+
     }
 
 }
