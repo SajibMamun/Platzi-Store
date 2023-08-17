@@ -1,6 +1,7 @@
 package com.example.platzistore.di
 
 import com.example.platzistore.network.AuthService
+import com.example.platzistore.network.ProductService
 import com.example.platzistore.network.UserService
 import com.example.platzistore.utils.AuthInterceptor
 import com.example.platzistore.utils.BASE_URL
@@ -42,6 +43,13 @@ fun provideHttpClient(interceptor: AuthInterceptor):OkHttpClient{
 
     }
 
+    @Provides
+    @Singleton
+    fun ProvideProductService(retrofit: Retrofit.Builder):ProductService {
+        return retrofit.build().create(ProductService::class.java)
+
+    }
+
         @Provides
         @Singleton
         fun provideUserService(retrofit: Retrofit.Builder,client: OkHttpClient):UserService{
@@ -49,4 +57,9 @@ fun provideHttpClient(interceptor: AuthInterceptor):OkHttpClient{
 
 
     }
+
+
+
+
+
 }
