@@ -1,6 +1,7 @@
 package com.example.platzistore.di
 
 import com.example.platzistore.network.AuthService
+import com.example.platzistore.network.UserService
 import com.example.platzistore.utils.AuthInterceptor
 import com.example.platzistore.utils.BASE_URL
 import dagger.Module
@@ -17,13 +18,13 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 class NetworkModule {
-
+    @Provides
+    @Singleton
     //httpclient obejct return then go to retrofit builder
 fun provideHttpClient(interceptor: AuthInterceptor):OkHttpClient{
     val client= OkHttpClient.Builder().addInterceptor(interceptor).build()
     return client
 }
-
 
     @Provides
     @Singleton
@@ -43,8 +44,8 @@ fun provideHttpClient(interceptor: AuthInterceptor):OkHttpClient{
 
         @Provides
         @Singleton
-        fun provideUserService(retrofit: Retrofit.Builder,client: OkHttpClient):AuthService{
-            return retrofit.client(client).build().create(AuthService::class.java)
+        fun provideUserService(retrofit: Retrofit.Builder,client: OkHttpClient):UserService{
+            return retrofit.client(client).build().create(UserService::class.java)
 
 
     }

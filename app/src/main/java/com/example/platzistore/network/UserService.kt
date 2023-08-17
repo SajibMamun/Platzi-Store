@@ -5,11 +5,13 @@ import com.example.platzistore.model.data.login.ResponseLogin
 import com.example.platzistore.model.data.profile.ResponseProfile
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
 
 interface UserService {
+
     @Headers("Accept: Bearer ")
-    @POST("auth/profile")
+    @GET("auth/profile")
     suspend fun userprofile(): Response<ResponseProfile>
 }
