@@ -12,7 +12,13 @@ import com.example.platzistore.databinding.ItemProductBinding
 import com.example.platzistore.model.data.product.ResponseProduct
 
 
-class ProductAdapter():ListAdapter<ResponseProduct, ProductAdapter.ProductViewHolder> (COMPARATOR) {
+class ProductAdapter(var listener:Listener):ListAdapter<ResponseProduct, ProductAdapter.ProductViewHolder> (COMPARATOR) {
+
+    interface Listener{
+        fun productClick(ProductID:Int)
+    }
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         return ProductViewHolder(
            ItemProductBinding .inflate(LayoutInflater.from(parent.context), parent, false)
@@ -39,7 +45,13 @@ class ProductAdapter():ListAdapter<ResponseProduct, ProductAdapter.ProductViewHo
                 holder.binding.categoryName.text = ctg.name
             }
 
+            holder.itemView.setOnClickListener {_ ->
+            listener.productClick(it.id)
+            }
+
         }
+
+
 
 
     }

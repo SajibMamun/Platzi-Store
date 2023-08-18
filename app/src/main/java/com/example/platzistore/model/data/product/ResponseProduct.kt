@@ -12,7 +12,7 @@ data class ResponseProduct(
     @SerializedName("description")
     var description: String?,
     @SerializedName("id")
-    var id: Int?,
+    var id: Int,
     @SerializedName("images")
     var images: List<String?>?,
     @SerializedName("price")

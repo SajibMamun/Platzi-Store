@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.platzistore.model.data.login.RequestLogin
 import com.example.platzistore.model.data.login.ResponseLogin
 import com.example.platzistore.model.data.product.ResponseProduct
@@ -18,26 +19,23 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class ProductViewModel @Inject constructor(private  val  repo: ProductRepo): ViewModel(){
+class ProductViewModel @Inject constructor(private val repo: ProductRepo) : ViewModel() {
 
-private val _response=MutableLiveData<Response<List<ResponseProduct>>>()
+    private val _response = MutableLiveData<Response<List<ResponseProduct>>>()
 
-    val productResponse:LiveData<Response<List<ResponseProduct>>> = _response
-
-
+    val productResponse: LiveData<Response<List<ResponseProduct>>> = _response
 
 
+    fun getAllProduct() {
 
-fun getAllProduct(){
+        viewModelScope.launch {
 
-    viewModelScope.launch {
+            _response.postValue(repo.getAllProduct())
 
-        _response.postValue(repo.getAllProduct())
+        }
 
     }
 
-
-}
 
 
 }
